@@ -1,6 +1,10 @@
 package com.rm.spring.finalex.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +33,48 @@ public class ApiController {
 	@Autowired
 	private ReservationService reservationService;
 
+	@GetMapping("/airline-tickets")
+	public String getAllAirlineTickets() throws JsonProcessingException {
+	    List<AirlineTicket> tickets = airlineTicketService.getAllTickets().collectList().block();
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    return objectMapper.writeValueAsString(tickets);
+	}
+
+	@GetMapping("/airline-tickets/{ticketId}")
+	public String getAirlineTicketById(@PathVariable String ticketId) throws JsonProcessingException {
+	    AirlineTicket ticket = airlineTicketService.getTicketById(ticketId).block();
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    return objectMapper.writeValueAsString(ticket);
+	}
+
+	@GetMapping("/customers")
+	public String getAllCustomers() throws JsonProcessingException {
+	    List<Customer> customers = customerService.getAllCustomers().collectList().block();
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    return objectMapper.writeValueAsString(customers);
+	}
+
+	@GetMapping("/customers/{customerId}")
+	public String getCustomerById(@PathVariable String customerId) throws JsonProcessingException {
+	    Customer customer = customerService.getCustomerById(customerId).block();
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    return objectMapper.writeValueAsString(customer);
+	}
+
+	@GetMapping("/reservations")
+	public String getAllReservations() throws JsonProcessingException {
+	    List<Reservation> reservations = reservationService.getAllReservations().collectList().block();
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    return objectMapper.writeValueAsString(reservations);
+	}
+
+	@GetMapping("/reservations/{reservationId}")
+	public String getReservationById(@PathVariable String reservationId) throws JsonProcessingException {
+	    Reservation reservation = reservationService.getReservationById(reservationId).block();
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    return objectMapper.writeValueAsString(reservation);
+	}
+	
 	@PostMapping("/airline-tickets")
 	public String createAirlineTicket(@RequestBody AirlineTicket airlineTicket) throws JsonProcessingException {
 		AirlineTicket ticket = airlineTicketService.createTicket(airlineTicket).block();

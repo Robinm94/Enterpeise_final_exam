@@ -3,6 +3,9 @@ package com.rm.spring.finalex.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +20,9 @@ public class AirlineTicket {
 	@Id
 	private String ticketId;
 	private String number;
+	@NotNull(message = "Number of seats cannot be null")
+	@Min(value = 1, message = "At least one seat must be selected")
+	@Max(value = 10, message = "Cannot book more than 10 seats at once")
 	private int numberOfSeats;
 	private String details;
 	private String ticketClass;
