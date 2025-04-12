@@ -3,6 +3,10 @@ package com.rm.spring.finalex.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,13 +20,28 @@ import lombok.ToString;
 public class Customer {
 	@Id
 	private String customerId;
-	private String firstName;
-	private String lastName;
-	private String email;
-	private String phone;
-	private String address;
-	private String reservation;
-	private String details;
+	@NotBlank(message = "First name is required")
+    @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
+    private String firstName;
+
+    @NotBlank(message = "Last name is required")
+    @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters")
+    private String lastName;
+
+    @Email(message = "Please provide a valid email address")
+    private String email;
+
+    @NotBlank(message = "Phone number is required")
+    @Pattern(regexp = "^[0-9]{3}-[0-9]{3}-[0-9]{4}$", message = "Phone must be in format XXX-XXX-XXXX")
+    private String phone;
+
+    @Size(max = 200, message = "Address cannot exceed 200 characters")
+    private String address;
+
+    private String reservation;
+
+    @Size(max = 500, message = "Details cannot exceed 500 characters")
+    private String details;
 	
 	public Customer() {
 		super();
