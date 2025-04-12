@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Display Data</title>
+</head>
+<body>
+    <h1>Created Entities</h1>
+    <h2>Customer</h2>
+    <p>First Name: <span th:text="${customer.firstName}"></span></p>
+    <p>Last Name: <span th:text="${customer.lastName}"></span></p>
+    <p>Phone: <span th:text="${customer.phone}"></span></p>
+
+    <h2>Reservation</h2>
+    <p>Ticket Number: <span th:text="${reservation.ticketNumber}"></span></p>
+    <p>Reservation Date: <span th:text="${reservation.reservationDateTime}"></span></p>
+
+    <h2>Airline Ticket</h2>
+    <p>Ticket Number: <span th:text="${airlineTicket.number}"></span></p>
+    <p>Number of Seats: <span th:text="${airlineTicket.numberOfSeats}"></span></p>
+    <p>Class: <span th:text="${airlineTicket.ticketClass}"></span></p>
+    <p>Price: <span th:text="${airlineTicket.price}"></span></p>
+</body>
+</html>

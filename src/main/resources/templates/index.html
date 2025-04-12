@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reservation Form</title>
+    <style>
+        body {
+            background-image: url('/images/plane.jpg');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: left;
+        }
+
+        .form-container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            width: 400px;
+            margin: 50px auto;
+            border-radius: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .btn-submit {
+            margin-top: 25px;
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #0078d4;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Fill your Details</h2>
+
+        <form th:action="@{/}"  method="post">
+            <label>First Name</label>
+            <input type="text" required name="firstName" />
+
+            <label>Last Name</label>
+            <input type="text"required name="lastName"/>
+
+            <label>No. of Passengers</label>
+            <input type="number" min="1" required name="noOfPassengers"/>
+
+            <label>Select Your Class</label>
+            <select name="ticketClass" required >
+                <option value="Economy">Economy class</option>
+                <option value="Business">Business class</option>
+                <option value="First">First class</option>
+            </select>
+
+            <label>Phone Number</label>
+            <input type="text"required name="phone" />
+
+            <label>Time</label>
+            <input type="time" required name="time"/>
+
+            <label>Date of Departing</label>
+            <input type="date"required  name="departingDate"/>
+
+            <button class="btn-submit" type="submit">Next</button>
+        </form>
+    </div>
+</body>
+</html>
